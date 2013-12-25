@@ -1,0 +1,59 @@
+!!! 5
+//if lt IE 7
+	html.no-js.ie6.oldie(lang='en')
+//if IE 7
+	html.no-js.ie7.oldie(lang='en')
+//if IE 8
+	html.no-js.ie8.oldie(lang='en') 
+//[if gt IE 8]><!
+html.no-js(lang='en')
+	//<![end if]
+	head
+		meta(charset='utf-8')
+		meta http-equiv='Content-Type', content='text/html')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		title=title
+		meta(name='viewport', content='width=device-width,initial-scale=1')
+		link(rel='stylesheet', href='css/styles/style.css', media='screen')
+		link(rel='stylesheet', href='css/styles/media-queries.css')
+		link(rel='stylesheet', href='css/flex-slider/flexslider.css', type='text/css', media='screen')
+		link(href='css/styles/prettyPhoto.css', rel='stylesheet', type='text/css', media='screen')
+		link(href='css/styles/tipsy.css', rel='stylesheet', type='text/css', media='screen')
+		script(type='text/javascript', src='js/scripts/jquery-1.7.1.min.js')
+		script(type='text/javascript', src='js/scripts/jquery.isotope.min.js')
+		script(type='text/javascript', src='js/scripts/jquery.smooth-scroll.min.js')
+		script(type='text/javascript', src='js/scripts/jquery.flexslider-min.js')
+		script(src='js/scripts/jquery.knob.js', type='text/javascript')
+		script(src='js/scripts/jquery.prettyPhoto.js', type='text/javascript')
+		script(src='js/scripts/jquery.tipsy.js', type='text/javascript')
+		script(type='text/javascript', src='js/scripts/waypoints.min.js')
+		script(type='text/javascript', src='js/scripts/setup.js')
+		script
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				ga('create', 'UA-40412130-1', 'af.cm');
+				ga('send', 'pageview');
+	body
+		block header
+
+		block content
+
+		//
+			block footer
+				#footer
+					p © Copyright notice here
+		//-script(defer, src='js/plugins.js')
+		script(defer, src='/js/script.js')
+		script(defer, src='/socket.io/socket.io.js')
+			script
+				var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+				(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+				g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+				s.parentNode.insertBefore(g,s)}(document,'script'));
+		//if lt IE 7
+			script(defer, src='//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js')
+			script(defer)
+				window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})
+				
