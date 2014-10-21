@@ -102,6 +102,16 @@ server.post '/sendMail', (req, res) ->
 									}
 			}
 
+server.get '/blog', (req,res) ->
+  res.render 'blog.jade', {
+    locals : {
+              title : 'Marko Oksanen'
+              ,description: 'Personal website & CV'
+              ,author: 'Marko Oksanen'
+              ,analyticssiteid: 'XXXXXXX'
+              }
+  }
+
 #A Route for Creating a 500 Error (Useful to keep around)
 server.get '/500', (req, res) ->
 	throw new Error 'This is a 500 Error'
