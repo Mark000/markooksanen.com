@@ -20,33 +20,33 @@ server.configure ->
 #setup the errors
 server.error (err, req, res, next) ->
 	if err instanceof NotFound
-		res.render '404.jade', { locals: { 
+		res.render '404.jade', { locals: {
 			title : '404 - Not Found'
 			,description: ''
 			,author: ''
-			,analyticssiteid: 'UA-40412130-1' 
+			,analyticssiteid: 'UA-40412130-1'
 			},status: 404 }
-	else 
+	else
 		console.log 'err: ' +err.stack
-		res.render '500.jade', { locals: { 
+		res.render '500.jade', { locals: {
 			title : 'The Server Encountered an Error'
 			,description: 'an error occurred with stack: '+err.stack
 			,author: ''
 			,analyticssiteid: 'UA-40412130-1'
-			,error: err 
+			,error: err
 			},status: 500 }
 server.listen port
 
 #Setup Socket.IO
 io = io.listen server
-io.sockets.on 'connection', (socket) -> 
+io.sockets.on 'connection', (socket) ->
 	console.log 'Client Connected'
-	socket.on 'message', (data) -> 
+	socket.on 'message', (data) ->
 		socket.broadcast.emit 'server_message', data
 		socket.emit 'server_message', data
 	socket.on 'disconnect', () ->
 		console.log 'Client Disconnected.'
-	
+
 
 
 ###
@@ -57,27 +57,27 @@ io.sockets.on 'connection', (socket) ->
 /////// ADD ALL YOUR ROUTES HERE  /////////
 ###
 
-server.get '/', (req,res) -> 
+server.get '/', (req,res) ->
 	res.render 'index.jade', {
-		locals : { 
+		locals : {
 							title : 'Marko Oksanen'
 							,description: 'Personal website & CV'
 							,author: 'Marko Oksanen'
-							,analyticssiteid: 'XXXXXXX' 
+							,analyticssiteid: 'XXXXXXX'
 							}
 	}
 
-server.post '/sendMail', (req, res) -> 
+server.post '/sendMail', (req, res) ->
 	console.log 'getting transport'
 	transport = nodemailer.createTransport('SMTP', {
 		service: "Mailgun",
 		auth: {
-			user: "postmaster@ideanimarkooksanen.mailgun.org",
-			pass: "6yzddd5coom8"
+			user: "postmaster@markooksanen.com",
+			pass: "b454362f88174c7452db3fa58dd748bf"
 			}
 	})
 	console.log 'transport: '+transport
-	
+
 	mailOptions = {
 		from: ""+req.body.name+" <"+req.body.email+">", #sender address
 		to: "marko.oksanen@aceconsulting.fi", #list of receivers
@@ -94,16 +94,16 @@ server.post '/sendMail', (req, res) ->
 		else
 			console.log "Message sent: " + response.message
 			res.render 'index.jade', {
-				locals : { 
+				locals : {
 									title : 'Marko Oksanen'
 									,description: 'Personal website & CV'
 									,author: 'Marko Oksanen'
-									,analyticssiteid: 'XXXXXXX' 
+									,analyticssiteid: 'XXXXXXX'
 									}
 			}
 
 #A Route for Creating a 500 Error (Useful to keep around)
-server.get '/500', (req, res) -> 
+server.get '/500', (req, res) ->
 	throw new Error 'This is a 500 Error'
 
 
@@ -116,4 +116,4 @@ NotFound = (msg) ->
 	Error.call this, msg
 	Error.captureStackTrace this, arguments.callee
 
-console.log 'Listening on http://0.0.0.0:' + port 
+console.log 'Listening on http://0.0.0.0:' + port
