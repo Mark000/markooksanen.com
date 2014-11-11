@@ -17,6 +17,13 @@ server.configure ->
 	server.use connect.static __dirname + '/static'
 	server.use server.router
 
+
+#Load the Ghost Module and Start Ghost
+ghost = require 'ghost'
+ghost().then (ghostServer) ->
+    ghostServer.start()
+
+
 #setup the errors
 server.error (err, req, res, next) ->
 	if err instanceof NotFound
@@ -103,14 +110,9 @@ server.post '/sendMail', (req, res) ->
 			}
 
 server.get '/blog', (req,res) ->
-  res.render 'blog.jade', {
-    locals : {
-              title : 'Marko Oksanen'
-              ,description: 'Personal website & CV'
-              ,author: 'Marko Oksanen'
-              ,analyticssiteid: 'XXXXXXX'
-              }
-  }
+  res.send 'hello'
+
+
 
 #A Route for Creating a 500 Error (Useful to keep around)
 server.get '/500', (req, res) ->

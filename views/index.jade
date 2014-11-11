@@ -5,10 +5,10 @@ block content
 		#sidebar
 			a#logo(href='#')
 				img(src='./images/webcv_header2.png', alt='')
-			// navigation menu 
+			// navigation menu
 			ul#navigation
 				li
-					a.active(href='#home') Me
+					a.active(href='#home') About Me
 				li
 					a(href='#about') Education
 				//
@@ -16,8 +16,9 @@ block content
 						a(href='#portfolio') Portfolio
 				li
 					a(href='#experience') Experience
-				li
-					a(href='#skills') My Skills
+				//
+					li
+						a(href='#skills') My Skills
 				li
 					a(href='#myclients') Blogs & Projects
 				li
@@ -26,36 +27,30 @@ block content
 			#home.page
 				.page_content
 					.profile
-						h3.page_title_home Hello! My name is Marko
-						img.profile(src='./images/cv.jpg', alt='')
+						h3.page_title_home About me
+						img.profile(src='https://markoblogpics.s3.amazonaws.com/images/cv_pic.png', alt='Marko Oksanen')
 						p.profile
 								small
-								| I am a young professional enthusiastic about developing new products and services. I am determined to master the skills of entrepreneurship to
-								| create and develop new ventures that change the world. I view challenges as learning opportunities and I 
-								| like to be hands-on involved in the creative processes of new product and business development.
+								| Hello! I am the co-founder of Tebla. We're developing new way to discover the restaurants
+								| you love. Tebla is a curated platform leveraging the local knowledge of the best places in your city.
+								| Our aim is to change your experience of dining out to be effortless, constant discovery with quality places you can trust.
+								| Never be disappointed while eating out again.
 						p.profile
 								small
-								| Involved in the software development business since 2007, my responsibilities have included product management, project management and hands-on software engineering. 
-								| As an independent consultant I have also participated in the sales process identifying customer needs and turning these to consulting projects. 
-								| By exceeding employer and customer expectations I’ve received great references from my work.
-						p.profile
-								small
-								| My broad experience is well suited to understanding different stakeholder views. 
-								| My strengths are in team leadership, prioritizing tasks and coordinating the creative product development work using agile methodology.
+								| I am passionate about everything I do. I love how entrepreneurship empowers people to create value in the world and
+								| solve problems worth solving. I did my Master's thesis about entrepreneurship education and I am still on a journey to
+								| be fully educated myself.
 			#about.page
-				// page about 
-				p.cv 
-					a(href='images/Marko_Oksanen_CV.pdf')
-						img.no_border(src='images/icon-print.png')
+				// page about
 				h3.page_title Education
 				.page_content
-					h4.blue	Master of Science (Technology) - Aalto University
+					h4.blue	MSc Tech - Aalto University
 					span.year
 						| 2004 - 2012
 					ul#education
 							li Degree completed with distinction at Aalto University 12.12.2012.
 							li Majored in Knowledge Intensive Business (studied also: Leadership, IT, Strategy and Entrepreneurship).
-					.clear	
+					.clear
 			//
 				#portfolio.page
 					h3.page_title Portfolio
@@ -93,12 +88,9 @@ block content
 							img.work.js(src='images/photos/09.jpg', alt='')
 						a(rel='prettyPhoto[gallery]', href='images/photos/10.jpg')
 							img.work.html_php(src='images/photos/10.jpg', alt='')
-					.clear	
-			#experience.page 
-				p.cv 
-					a(href='images/Marko_Oksanen_CV.pdf')
-						img.no_border(src='images/icon-print.png')
-				h3.page_title My experience
+					.clear
+			#experience.page
+					h3.page_title My experience
 				.page_content
 					h4.blue	Entrepreneur & Consultant
 					span.year
@@ -123,83 +115,87 @@ block content
 					.space
 					.clear
 			#skills.page
-				// page skills 
-				h3.page_title My Skills
-				.page_content
-					p
-						| I am a young professional with burning passion to develop business that deliver real customer value. I have professional competences (50%) in a broad skill-set and I am very motivated to develop my skills to mastery (100%).
-						| I am especially enthusiastic about developing skills related to strategy, product management, new venture development and entrepreneurship. However, I am always passionate about what I do and eager to learn anything new.
-					
-					.one_fourth.first
-						.column_content
-							h4.blue Strategy
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='69')
-					.one_fourth
-						.column_content
-							h4.blue Project mgmt
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='71', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.one_fourth
-						.column_content
-							h4.blue product owner
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='81', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.one_fourth.last
-						.column_content
-							h4.blue scrum
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='79', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.one_fourth.first
-						.column_content
-							h4.blue coding
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='65')
-					.one_fourth
-						.column_content
-							h4.blue design
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='41', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.one_fourth
-						.column_content
-							h4.blue sales
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='54', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.one_fourth.last
-						.column_content
-							h4.blue PaaS
-							input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='43', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
-					.clear
+				// page skills
+					h3.page_title My Skills
+					.page_content
+						p
+							| I am a young professional with burning passion to develop business that deliver real customer value. I have professional competences (50%) in a broad skill-set and I am very motivated to develop my skills to mastery (100%).
+							| I am especially enthusiastic about developing skills related to strategy, product management, new venture development and entrepreneurship. However, I am always passionate about what I do and eager to learn anything new.
+
+						.one_fourth.first
+							.column_content
+								h4.blue Strategy
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='69')
+						.one_fourth
+							.column_content
+								h4.blue Project mgmt
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='71', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth
+							.column_content
+								h4.blue product owner
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='81', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.last
+							.column_content
+								h4.blue scrum
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='79', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.first
+							.column_content
+								h4.blue coding
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='65')
+						.one_fourth
+							.column_content
+								h4.blue design
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='41', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth
+							.column_content
+								h4.blue sales
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='54', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.last
+							.column_content
+								h4.blue PaaS
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='43', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.clear
 			#myclients.page
-				// page clients 
+				// page clients
 				h3.page_title Blogs & Projects
 				.page_content
 					p
-						| Here are links to my blogs and to projects I have contributed to 
+						| Here are links to my blogs and to projects I have contributed to
 					br
 					ul#education
+						//
+							li
+								a(href='http://blog.markooksanen.com/')
+									| How I WOULD start a company - A blog about the process of starting a new company.
 						li
-							a(href='http://blog.markooksanen.com/') 
-								| How I WOULD start a company - A blog about the process of starting a new company.
-						li
-							a(href='http://ideani.wordpress.com/') 
-								| Yrittäjyyskoulutuksesta - Blogi tutkimusmatkasta yrittäjyyteen ja yrittäjyyskoulutukseen (in finnish)
-						li
-							a(href='http://www.breakitapp.com') 
-								| Breakit - A mobile app for iPhone
-						li
-							a(href='http://www.321point.com') 
-								| 321Point - A social party game to get to know your friends [UNDER CONSTRUCTION]
-						li
-							a(href='http://www.brunssille.com') 
-								| Brunssille.com - A site for checking out nearby brunch places and their reviews [UNDER CONSTRUCTION]
+							a(href='http://ideani.wordpress.com/', class= "project")
+								| Blog about Entrepreneurship Education (in Finnish)
+						//
+							li
+								a(href='http://www.breakitapp.com')
+									| Breakit - A mobile app for iPhone
+						//
+							li
+								a(href='http://www.321point.com')
+									| 321Point - A social party game to get to know your friends [UNDER CONSTRUCTION]
+						//
+							li
+								a(href='http://www.brunssille.com')
+									| Brunssille.com - A site for checking out nearby brunch places and their reviews [UNDER CONSTRUCTION]
 					.space
 					.clear
 			#contact.page
 				h3.page_title	Let's Get in Touch
 				.page_content
 					fieldset#contact_form
-						#msgs	
+						#msgs
 						form#cform(name='cform', method='post', action='/sendMail', method = 'post')
 							input#name(type='text', name='name', value='Full Name*', onfocus='if(this.value == \'Full Name*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Full Name*\'')
 							input#email(type='text', name='email', value='Email Address*', onfocus='if(this.value == \'Email Address*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Email Address*\'')
 							input#subject(type='text', name='subject', value='Subject*', onfocus='if(this.value == \'Subject*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Subject*\'')
 							textarea#msg(name='message', onfocus='if(this.value == \'Your Message*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Your Message*\'') Your Message*
 							input#submit.button(type = "submit", value = "Send Message")
-							
+
 					.clear
 					ul.social_icons
 						li
@@ -215,10 +211,10 @@ block content
 			.space
 			.space
 			.space
-			
+
 			.footer
 				p
-				| © 2013
+				| © 2014
 				| Marko Oksanen
 
 	a.gotop(href='#top') Top
