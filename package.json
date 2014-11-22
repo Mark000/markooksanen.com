@@ -17,7 +17,9 @@
 	"devDependencies": {
 	   "vows": "0.5.x",
 	   "mocha": "*",
-	   "should": "*"
+	   "should": "*",
+     "http-proxy":"latest"
+
 	   },
 	"engine": "node >= 0.6.6"
 	}
