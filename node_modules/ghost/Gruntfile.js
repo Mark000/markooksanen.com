@@ -44,8 +44,7 @@ var _              = require('lodash'),
                     'core/*.js',
                     'core/server/**/*.js',
                     'core/shared/**/*.js',
-                    '!core/shared/vendor/**/*.js',
-                    '!core/shared/lib/**/*.js'
+                    '!core/shared/vendor/**/*.js'
                 ]
             }
         },
@@ -190,7 +189,8 @@ var _              = require('lodash'),
                     },
                     client: {
                         options: {
-                            config: '.jscsrc'
+                            config: '.jscsrc',
+                            esnext: true
                         }
                     },
                     test: {
@@ -199,12 +199,6 @@ var _              = require('lodash'),
                         }
                     }
                 }, lintFiles);
-
-                // JSCS depends on Esprima which doesn't yet support ES6 module
-                // syntax.  As such we cannot run JSCS on the client code yet.
-                // Related JSCS issue: https://github.com/jscs-dev/node-jscs/issues/561
-                // @TODO(hswolff): remove this once JSCS supports ES6.
-                delete jscsConfig.client;
 
                 return jscsConfig;
             })(),
@@ -230,6 +224,10 @@ var _              = require('lodash'),
                 // ##### Groups of unit tests
                 server: {
                     src: ['core/test/unit/**/server*_spec.js']
+                },
+
+                helpers: {
+                    src: ['core/test/unit/server_helpers/*_spec.js']
                 },
 
                 showdown: {
@@ -275,6 +273,13 @@ var _              = require('lodash'),
                     src: [
                         'core/test/functional/routes/**/*_test.js'
                     ]
+                },
+
+                // #### All Module tests
+                module: {
+                    src: [
+                        'core/test/functional/module/**/*_test.js'
+                    ]
                 }
             },
 
@@ -308,7 +313,7 @@ var _              = require('lodash'),
             sass: {
                 compress: {
                     options: {
-                        style: 'compressed',
+                        outputStyle: 'nested', // TODO: Set back to 'compressed' working correctly with our dependencies
                         sourceMap: true
                     },
                     files: [
@@ -326,9 +331,13 @@ var _              = require('lodash'),
                     map: true, // Use and update the sourcemap
                     browsers: ['last 2 versions', '> 1%', 'Explorer 10']
                 },
-                single_file: {
+                ghost: {
                     src: 'core/client/assets/css/<%= pkg.name %>.min.css',
                     dest: 'core/client/assets/css/<%= pkg.name %>.min.css'
+                },
+                docs: {
+                    src: 'core/client/docs/dist/css/<%= pkg.name %>.min.css',
+                    dest: 'core/client/docs/dist/css/<%= pkg.name %>.min.css'
                 }
             },
 
@@ -509,7 +518,6 @@ var _              = require('lodash'),
                     src: [
                         'bower_components/loader.js/loader.js',
                         'bower_components/jquery/dist/jquery.js',
-                        'bower_components/lodash/dist/lodash.js',
                         'bower_components/handlebars/handlebars.js',
                         'bower_components/ember/ember.js',
                         'bower_components/ember-data/ember-data.js',
@@ -521,7 +529,7 @@ var _              = require('lodash'),
                         'bower_components/codemirror/addon/mode/overlay.js',
                         'bower_components/codemirror/mode/markdown/markdown.js',
                         'bower_components/codemirror/mode/gfm/gfm.js',
-                        'bower_components/showdown/src/showdown.js',
+                        'bower_components/showdown-ghost/src/showdown.js',
                         'bower_components/moment/moment.js',
                         'bower_components/keymaster/keymaster.js',
                         'bower_components/device/lib/device.js',
@@ -532,11 +540,10 @@ var _              = require('lodash'),
                         'bower_components/ember-simple-auth/simple-auth.js',
                         'bower_components/ember-simple-auth/simple-auth-oauth2.js',
                         'bower_components/google-caja/html-css-sanitizer-bundle.js',
+                        'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
 
                         'core/shared/lib/showdown/extensions/ghostimagepreview.js',
-                        'core/shared/lib/showdown/extensions/ghostgfm.js',
-
-                        'core/shared/lib/nanoscroller/nanoscroller.js'
+                        'core/shared/lib/showdown/extensions/ghostgfm.js'
                     ]
                 },
 
@@ -546,7 +553,6 @@ var _              = require('lodash'),
                     src: [
                         'bower_components/loader.js/loader.js',
                         'bower_components/jquery/dist/jquery.js',
-                        'bower_components/lodash/dist/lodash.js',
                         'bower_components/handlebars/handlebars.runtime.js',
                         'bower_components/ember/ember.prod.js',
                         'bower_components/ember-data/ember-data.prod.js',
@@ -558,7 +564,7 @@ var _              = require('lodash'),
                         'bower_components/codemirror/addon/mode/overlay.js',
                         'bower_components/codemirror/mode/markdown/markdown.js',
                         'bower_components/codemirror/mode/gfm/gfm.js',
-                        'bower_components/showdown/src/showdown.js',
+                        'bower_components/showdown-ghost/src/showdown.js',
                         'bower_components/moment/moment.js',
                         'bower_components/keymaster/keymaster.js',
                         'bower_components/device/lib/device.js',
@@ -569,11 +575,10 @@ var _              = require('lodash'),
                         'bower_components/ember-simple-auth/simple-auth.js',
                         'bower_components/ember-simple-auth/simple-auth-oauth2.js',
                         'bower_components/google-caja/html-css-sanitizer-bundle.js',
+                        'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
 
                         'core/shared/lib/showdown/extensions/ghostimagepreview.js',
-                        'core/shared/lib/showdown/extensions/ghostgfm.js',
-
-                        'core/shared/lib/nanoscroller/nanoscroller.js'
+                        'core/shared/lib/showdown/extensions/ghostgfm.js'
                     ]
                 }
             },
@@ -623,12 +628,12 @@ var _              = require('lodash'),
         // Custom test runner for our Casper.js functional tests
         // This really ought to be refactored into a separate grunt task module
         grunt.registerTask('spawnCasperJS', function (target) {
-            target = _.contains(['client', 'frontend', 'setup'], target) ? target + '/' : undefined;
+            target = _.contains(['client', 'setup'], target) ? target + '/' : undefined;
 
             var done = this.async(),
                 options = ['host', 'noPort', 'port', 'email', 'password'],
                 args = ['test']
-                    .concat(grunt.option('target') || target || ['client/', 'frontend/'])
+                    .concat(grunt.option('target') || target || ['client/'])
                     .concat(['--includes=base.js', '--log-level=debug', '--port=2369']);
 
             // Forward parameters from grunt to casperjs
@@ -764,7 +769,7 @@ var _              = require('lodash'),
         // details of each of the test suites.
         //
         grunt.registerTask('test', 'Run tests and lint code',
-            ['jshint', 'jscs', 'test-routes', 'test-unit', 'test-integration', 'test-functional']);
+            ['jshint', 'jscs', 'test-routes', 'test-module', 'test-unit', 'test-integration', 'test-functional']);
 
         // ### Lint
         //
@@ -840,6 +845,14 @@ var _              = require('lodash'),
         // quick to test many permutations of routes / urls in the system.
         grunt.registerTask('test-routes', 'Run functional route tests (mocha)',
             ['clean:test', 'setTestEnv', 'ensureConfig', 'mochacli:routes']);
+
+        // ### Module tests *(sub task)*
+        // `grunt test-module` will run just the module tests
+        //
+        // The purpose of the module tests is to ensure that Ghost can be used as an npm module and exposes all
+        // required methods to interact with it.
+        grunt.registerTask('test-module', 'Run functional module tests (mocha)',
+            ['clean:test', 'setTestEnv', 'ensureConfig', 'mochacli:module']);
 
         // ### Functional tests for the setup process
         // `grunt test-functional-setup will run just the functional tests for the setup page.
@@ -961,9 +974,9 @@ var _              = require('lodash'),
                 releaseDate: ninetyDaysAgo,
                 count: 20
             }).then(function makeContributorTemplate(contributors) {
-                var contributorTemplate = '<li>\n\t<a href="<%githubUrl%>" title="<%name%>">\n' +
-                    '\t\t<img src="{{unbound ghostPaths.contributorsDir}}/<%name%>" alt="<%name%>">\n' +
-                    '\t</a>\n</li>';
+                var contributorTemplate = '<li>\n    <a href="<%githubUrl%>" title="<%name%>">\n' +
+                    '        <img src="{{gh-path "admin" "/img/contributors"}}/<%name%>" alt="<%name%>">\n' +
+                    '    </a>\n</li>';
 
                 grunt.verbose.writeln('Creating contributors template.');
                 grunt.file.write(templatePath,

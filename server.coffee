@@ -2,9 +2,19 @@
 connect = require 'connect'
 	, express = require 'express'
 	, io = require 'socket.io'
-	, port = process.env.PORT || 8081
+	, port = process.env.PORT || 8000
 
 nodemailer = require 'nodemailer'
+
+httpProxy = require 'http-proxy'
+blogProxy = httpProxy.createProxyServer()
+
+#Load the Ghost Module
+#Hapi = require 'hapi'
+#path = require 'path'
+#ghost = require 'ghost'
+
+#server = new Hapi.Server('0.0.0.0', '8000');
 
 #Setup Express
 server = express.createServer()
@@ -16,13 +26,6 @@ server.configure ->
 	server.use express.session { secret: "shhhhhhhhh!"}
 	server.use connect.static __dirname + '/static'
 	server.use server.router
-
-
-#Load the Ghost Module and Start Ghost
-ghost = require 'ghost'
-ghost().then (ghostServer) ->
-    ghostServer.start()
-
 
 #setup the errors
 server.error (err, req, res, next) ->
@@ -74,6 +77,36 @@ server.get '/', (req,res) ->
 							}
 	}
 
+server.get '/blog*', (req, res, next) ->
+		req.headers.host = 'https://markooksanenblog.herokuapp.com';
+		blogProxy.web req, res, { target: 'https://markooksanenblog.herokuapp.com' }
+
+###
+ server.get '/blog*', (req,res) ->
+  blogProxy.web req, res, { target: 'http://localhost:2368' }
+  console.log 'Hello!!'
+###
+
+#server == parentApp running express
+#rootApp = Ghost server
+
+###
+ghost().then (ghostServer) ->
+#	server.use ghostServer.config.paths.subdir, ghostServer.rootApp
+#	server.use 'http://localhost:2368', ghostServer.rootApp
+	ghostServer.start server
+	console.log 'Hello again :) '
+ghost().then (ghostServer) ->
+	#	server.use ghostServer.config.paths.subdir, ghostServer.rootApp
+	#	server.use 'http://localhost:2368', ghostServer.rootApp
+	ghostServer.start server
+
+ghost({
+    config: path.join(__dirname, 'config.js')
+})
+###
+
+
 server.post '/sendMail', (req, res) ->
 	console.log 'getting transport'
 	transport = nodemailer.createTransport('SMTP', {
@@ -108,10 +141,6 @@ server.post '/sendMail', (req, res) ->
 									,analyticssiteid: 'XXXXXXX'
 									}
 			}
-
-server.get '/blog', (req,res) ->
-  res.send 'hello'
-
 
 
 #A Route for Creating a 500 Error (Useful to keep around)

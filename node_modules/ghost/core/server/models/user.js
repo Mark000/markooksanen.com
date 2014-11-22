@@ -3,9 +3,9 @@ var _              = require('lodash'),
     errors         = require('../errors'),
     bcrypt         = require('bcryptjs'),
     ghostBookshelf = require('./base'),
-    http           = require('http'),
     crypto         = require('crypto'),
     validator      = require('validator'),
+    request        = require('request'),
     validation     = require('../data/validation'),
     config         = require('../config'),
 
@@ -52,7 +52,7 @@ User = ghostBookshelf.Model.extend({
         if (this.hasChanged('slug') || !this.get('slug')) {
             // Generating a slug requires a db call to look for conflicting slugs
             return ghostBookshelf.Model.generateSlug(User, this.get('slug') || this.get('name'),
-                {transacting: options.transacting})
+                {transacting: options.transacting, shortSlug: !this.get('slug')})
                 .then(function (slug) {
                     self.set({slug: slug});
                 });
@@ -92,6 +92,16 @@ User = ghostBookshelf.Model.extend({
         delete attrs.password;
 
         return attrs;
+    },
+
+    format: function (options) {
+        if (!_.isEmpty(options.website) &&
+            !validator.isURL(options.website, {
+            require_protocol: true,
+            protocols: ['http', 'https']})) {
+            options.website = 'http://' + options.website;
+        }
+        return options;
     },
 
     posts: function () {
@@ -493,6 +503,7 @@ User = ghostBookshelf.Model.extend({
 
         options = this.filterOptions(options, 'setup');
         options.withRelated = _.union(['roles'], options.include);
+        options.shortSlug = true;
 
         return validatePasswordLength(userData.password).then(function () {
             // Generate a new password hash
@@ -780,10 +791,14 @@ User = ghostBookshelf.Model.extend({
         }).then(function (email) {
             // Fetch the user by email, and hash the password at the same time.
             return Promise.join(
-                self.forge({email: email.toLocaleLowerCase()}).fetch({require: true}),
+                self.getByEmail(email),
                 generatePasswordHash(newPassword)
             );
         }).then(function (results) {
+            if (!results[0]) {
+                return Promise.reject(new Error('User not found'));
+            }
+
             // Update the user with the new password hash
             var foundUser = results[0],
                 passwordHash = results[1];
@@ -844,14 +859,16 @@ User = ghostBookshelf.Model.extend({
                 resolve(userData);
             }
 
-            http.get('http:' + gravatarUrl, function (res) {
-                if (res.statusCode !== 404) {
+            request({url: 'http:' + gravatarUrl, timeout: 2000}, function (err, response) {
+                if (err) {
+                    // just resolve with no image url
+                    resolve(userData);
+                }
+
+                if (response.statusCode !== 404) {
                     userData.image = gravatarUrl;
                 }
 
-                resolve(userData);
-            }).on('error', function () {
-                // Error making request just continue.
                 resolve(userData);
             });
         });
