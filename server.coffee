@@ -138,7 +138,7 @@ server.post '/sendMail', (req, res) ->
 									title : 'Marko Oksanen'
 									,description: 'Personal website & CV'
 									,author: 'Marko Oksanen'
-									,analyticssiteid: 'XXXXXXX'
+									,analyticssiteid: 'UA-58573235-1'
 									}
 			}
 
