@@ -78,6 +78,7 @@ server.get '/', (req,res) ->
 	}
 
 server.get '/feed', (req,res) ->
+	console.log 'test'
 	res.render 'feed.jade'
 
 

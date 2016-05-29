@@ -88,6 +88,7 @@
   });
 
   server.get('/feed', function(req, res) {
+    console.log('test');
     return res.render('feed.jade');
   });
 
