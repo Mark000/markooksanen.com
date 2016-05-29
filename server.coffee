@@ -4,16 +4,6 @@ connect = require 'connect'
 	, io = require 'socket.io'
 	, port = process.env.PORT || 8000
 
-httpProxy = require 'http-proxy'
-blogProxy = httpProxy.createProxyServer()
-
-#Load the Ghost Module
-#Hapi = require 'hapi'
-#path = require 'path'
-#ghost = require 'ghost'
-
-#server = new Hapi.Server('0.0.0.0', '8000');
-
 #Setup Express
 server = express.createServer()
 server.configure ->
@@ -78,37 +68,6 @@ server.get '/', (req,res) ->
 server.get '/feed', (req,res) ->
 	console.log 'test'
 	res.render 'feed.jade'
-
-
-server.get '/blog*', (req, res, next) ->
-		req.headers.host = 'https://markooksanenblog.herokuapp.com';
-		blogProxy.web req, res, { target: 'https://markooksanenblog.herokuapp.com' }
-
-###
- server.get '/blog*', (req,res) ->
-  blogProxy.web req, res, { target: 'http://localhost:2368' }
-  console.log 'Hello!!'
-###
-
-#server == parentApp running express
-#rootApp = Ghost server
-
-###
-ghost().then (ghostServer) ->
-#	server.use ghostServer.config.paths.subdir, ghostServer.rootApp
-#	server.use 'http://localhost:2368', ghostServer.rootApp
-	ghostServer.start server
-	console.log 'Hello again :) '
-ghost().then (ghostServer) ->
-	#	server.use ghostServer.config.paths.subdir, ghostServer.rootApp
-	#	server.use 'http://localhost:2368', ghostServer.rootApp
-	ghostServer.start server
-
-ghost({
-    config: path.join(__dirname, 'config.js')
-})
-###
-
 
 #A Route for Creating a 500 Error (Useful to keep around)
 server.get '/500', (req, res) ->
