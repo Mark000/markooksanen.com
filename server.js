@@ -88,14 +88,7 @@
   });
 
   server.get('/feed', function(req, res) {
-    return res.render('feed.jade', {
-      locals: {
-        title: 'Test product feed',
-        description: 'Personal website & CV',
-        author: 'Marko Oksanen',
-        analyticssiteid: 'XXXXXXX'
-      }
-    });
+    return res.render('feed.jade');
   });
 
   server.get('/blog*', function(req, res, next) {
