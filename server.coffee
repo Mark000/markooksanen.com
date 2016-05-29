@@ -67,7 +67,14 @@ server.get '/', (req,res) ->
 
 server.get '/feed', (req,res) ->
 	console.log 'test'
-	res.render 'feed.jade'
+	res.render 'feed.jade',  {
+		locals : {
+							title : 'Example Product Feed'
+							,description: 'Personal website & CV'
+							,author: 'Marko Oksanen'
+							,analyticssiteid: 'XXXXXXX'
+							}
+	}
 
 #A Route for Creating a 500 Error (Useful to keep around)
 server.get '/500', (req, res) ->

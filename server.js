@@ -83,7 +83,14 @@
 
   server.get('/feed', function(req, res) {
     console.log('test');
-    return res.render('feed.jade');
+    return res.render('feed.jade', {
+      locals: {
+        title: 'Example Product Feed',
+        description: 'Personal website & CV',
+        author: 'Marko Oksanen',
+        analyticssiteid: 'XXXXXXX'
+      }
+    });
   });
 
   server.get('/500', function(req, res) {
