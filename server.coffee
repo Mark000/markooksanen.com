@@ -4,8 +4,6 @@ connect = require 'connect'
 	, io = require 'socket.io'
 	, port = process.env.PORT || 8000
 
-nodemailer = require 'nodemailer'
-
 httpProxy = require 'http-proxy'
 blogProxy = httpProxy.createProxyServer()
 
@@ -110,42 +108,6 @@ ghost({
     config: path.join(__dirname, 'config.js')
 })
 ###
-
-
-server.post '/sendMail', (req, res) ->
-	console.log 'getting transport'
-	transport = nodemailer.createTransport('SMTP', {
-		service: "Mailgun",
-		auth: {
-			user: "postmaster@markooksanen.com",
-			pass: "b454362f88174c7452db3fa58dd748bf"
-			}
-	})
-	console.log 'transport: '+transport
-
-	mailOptions = {
-		from: ""+req.body.name+" <"+req.body.email+">", #sender address
-		to: "marko.oksanen@aceconsulting.fi", #list of receivers
-		subject: req.body.subject, #Subject line
-		text: req.body.message, #plaintext body
-		html: req.body.message #html body
-	}
-
-	#send mail with defined transport object
-	transport.sendMail mailOptions, (error, response) ->
-		if error
-			console.log error
-			res.send 'error in sending mail'
-		else
-			console.log "Message sent: " + response.message
-			res.render 'index.jade', {
-				locals : {
-									title : 'Marko Oksanen'
-									,description: 'Personal website & CV'
-									,author: 'Marko Oksanen'
-									,analyticssiteid: 'UA-58573235-1'
-									}
-			}
 
 
 #A Route for Creating a 500 Error (Useful to keep around)
