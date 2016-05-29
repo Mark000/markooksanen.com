@@ -67,7 +67,7 @@ server.get '/', (req,res) ->
 
 server.get '/feed', (req,res) ->
 	console.log 'test'
-	res.render 'feed.json',  {
+	res.render 'feed.jade',  {
 		locals : {
 							title : 'Example Product Feed'
 							,description: 'Personal website & CV'
