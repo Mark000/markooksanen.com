@@ -77,6 +77,17 @@ server.get '/', (req,res) ->
 							}
 	}
 
+server.get '/feed', (req,res) ->
+	res.render 'feed.jade', {
+		locals : {
+							title : 'Test product feed'
+							,description: 'Personal website & CV'
+							,author: 'Marko Oksanen'
+							,analyticssiteid: 'XXXXXXX'
+							}
+	}
+
+
 server.get '/blog*', (req, res, next) ->
 		req.headers.host = 'https://markooksanenblog.herokuapp.com';
 		blogProxy.web req, res, { target: 'https://markooksanenblog.herokuapp.com' }
