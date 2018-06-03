@@ -1,0 +1,229 @@
+extends layout
+
+block content
+	#wrap
+		#sidebar
+			a#logo(href='#')
+				img(src='./images/webcv_header2.png', alt='')
+			// navigation menu
+			ul#navigation
+				li
+					a.active(href='#home') About Me
+				li
+					a(href='#about') Education
+				//
+					li
+						a(href='#portfolio') Portfolio
+				li
+					a(href='#experience') Experience
+				//
+					li
+						a(href='#skills') My Skills
+				li
+					a(href='#myclients') Blogs & Projects
+				li
+					a(href='#contact') Contact me
+		#container
+			#home.page
+				.page_content
+					.profile
+						h3.page_title_home About me
+						img.profile(src='https://markoblogpics.s3.amazonaws.com/images/cv_pic.png', alt='Marko Oksanen')
+						p.profile
+								small
+								| Hello! I am the co-founder of Tebla. We're developing new way to discover the restaurants
+								| you love. Tebla is a curated platform leveraging the local knowledge of the best places in your city.
+								| Our aim is to change your experience of dining out to be effortless, constant discovery with quality places you can trust.
+								| Never be disappointed while eating out again.
+						p.profile
+								small
+								| I am passionate about everything I do. I love how entrepreneurship empowers people to create value in the world and
+								| solve problems worth solving. I did my Master's thesis about entrepreneurship education and I am still on a journey to
+								| be fully educated myself.
+			#about.page
+				// page about
+				h3.page_title Education
+				.page_content
+					h4.blue	MSc Tech - Aalto University
+					span.year
+						| 2004 - 2012
+					ul#education
+							li Degree completed with distinction at Aalto University 12.12.2012.
+							li Majored in Knowledge Intensive Business (studied also: Leadership, IT, Strategy and Entrepreneurship).
+					.clear
+			//
+				#portfolio.page
+					h3.page_title Portfolio
+					.page_content
+						p
+							| Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+							| incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+							| exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						ul#works_filter
+							li
+								a.selected(href='#', data-filter='*') Show All
+							li
+								a(href='#', data-filter='.css') CSS
+							li
+								a(href='#', data-filter='.html_php') HTML / PHP
+							li
+								a(href='#', data-filter='.js') JavaScript
+						.clear
+					#works
+						a(rel='prettyPhoto[gallery]', href='images/photos/01.jpg')
+							img.work.js(src='images/photos/01.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/03.jpg')
+							img.work.css(src='images/photos/03.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/04.jpg')
+							img.work.html_php(src='images/photos/04.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/05.jpg')
+							img.work.html_php(src='images/photos/05.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/06.jpg')
+							img.work.css(src='images/photos/06.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/07.jpg')
+							img.work.js(src='images/photos/07.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/08.jpg')
+							img.work.html_php(src='./images/photos/08.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/09.jpg')
+							img.work.js(src='images/photos/09.jpg', alt='')
+						a(rel='prettyPhoto[gallery]', href='images/photos/10.jpg')
+							img.work.html_php(src='images/photos/10.jpg', alt='')
+					.clear
+
+			#experience.page
+				h3.page_title My experience
+				.page_content
+					h4.blue	Co-founder @ Tebla
+					span.year
+						| June 2014 -
+					ul#education
+							li We're building the next big thing.
+					h4.blue	Product Manager @ Fyber
+					span.year
+						| July 2013 - June 2014
+					ul#education
+							li I started as owning a SponsorPay's strategic video product ("AppEngage"), and quickly evolved to being the product owner of the direct advertiser side of the business as well as holding the product owner role for the development team working on this side of the business.
+					h4.blue	Researching entrepreneurship & Consulting
+					span.year
+						| March 2011 - July 2013
+					ul#education
+							li Co-founded the start-up Breakit. Leading the product development of a mobile application using agile development methodologies and developing back-end using modern JavaScript libraries. (June 2012 – )
+							li Master's thesis about entrepreneurship and its education. My thesis was <a class="intext" href='http://tinyurl.com/mastersth'>published</a> by TEK (1000 copies).
+							li Various consulting projects as an independent consultant through my company (Ideani). (March 2011 – )
+					h4.blue	Analyst @ Accenture Oy
+					span.year
+						| June 2009 - July 2010
+					ul#education
+							li Specifying requirements together with customers and designing a quality ensurance process.
+							li Independent software development project using Struts2 -framework.
+					h4.blue	Product Manager / Software Engineer — Ironstar Helsinki Oy
+					span.year
+						| April 2007 - September 2008
+					ul#education
+							li Implemented agile methodologies (scrum).
+							li Software development using object oriented design and technologies like J2EE, JSP, & SQL.
+					br
+					.space
+					.clear
+			#skills.page
+				// page skills
+					h3.page_title My Skills
+					.page_content
+						p
+							| I am a young professional with burning passion to develop business that deliver real customer value. I have professional competences (50%) in a broad skill-set and I am very motivated to develop my skills to mastery (100%).
+							| I am especially enthusiastic about developing skills related to strategy, product management, new venture development and entrepreneurship. However, I am always passionate about what I do and eager to learn anything new.
+
+						.one_fourth.first
+							.column_content
+								h4.blue Strategy
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='69')
+						.one_fourth
+							.column_content
+								h4.blue Project mgmt
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='71', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth
+							.column_content
+								h4.blue product owner
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='81', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.last
+							.column_content
+								h4.blue scrum
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='79', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.first
+							.column_content
+								h4.blue coding
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', data-fgcolor='#cfdee7', data-bgcolor='#0d4667', value='65')
+						.one_fourth
+							.column_content
+								h4.blue design
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='41', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth
+							.column_content
+								h4.blue sales
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='54', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.one_fourth.last
+							.column_content
+								h4.blue PaaS
+								input.knob(data-readonly='true', data-width='120', data-min='0', data-angleoffset='0', data-displayprevious='true', value='43', data-fgcolor='#cfdee7', data-bgcolor='#0d4667')
+						.clear
+			#myclients.page
+				// page clients
+				h3.page_title Blogs & Projects
+				.page_content
+					p
+						| Here are links to my blogs and to projects I have contributed to
+					br
+					ul#education
+						li
+							a(href='http://blog.markooksanen.com/', class= "project")
+								| A blog about learning entrepreneurship.
+						li
+							a(href='http://ideani.wordpress.com/', class= "project")
+								| Blog about Entrepreneurship Education (in Finnish)
+						li
+							a(href='http://www.tebla.com', class= "project")
+								| Tebla - A restaurant discovery & reservations platform for the best restaurants in Berlin.
+						//
+							li
+								a(href='http://www.321point.com')
+									| 321Point - A social party game to get to know your friends [UNDER CONSTRUCTION]
+						//
+							li
+								a(href='http://www.brunssille.com')
+									| Brunssille.com - A site for checking out nearby brunch places and their reviews [UNDER CONSTRUCTION]
+					.space
+					.clear
+			#contact.page
+				h3.page_title	Let's Get in Touch
+				.page_content
+					fieldset#contact_form
+						#msgs
+						form#cform(name='cform', method='post', action='/sendMail', method = 'post')
+							input#name(type='text', name='name', value='Full Name*', onfocus='if(this.value == \'Full Name*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Full Name*\'')
+							input#email(type='text', name='email', value='Email Address*', onfocus='if(this.value == \'Email Address*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Email Address*\'')
+							input#subject(type='text', name='subject', value='Subject*', onfocus='if(this.value == \'Subject*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Subject*\'')
+							textarea#msg(name='message', onfocus='if(this.value == \'Your Message*\') this.value = \'\'', onblur='if(this.value == \'\') this.value = \'Your Message*\'') Your Message*
+							input#submit.button(type = "submit", value = "Send Message")
+
+					.clear
+					ul.social_icons
+						li
+							a#fb(href='http://www.facebook.com/marko.oksanen', original-title='Know me? Add me on Facebook!')
+								img(src='images/facebook.png', alt='Facebook')
+						li
+							a#tw(href='https://twitter.com/_Mark0', original-title='Follow Me on Twitter')
+								img(src='images/twitter.png', alt='Twitter')
+						li
+							a#ld(href='http://fi.linkedin.com/in/markooksanen', original-title='Find me on LinkedIn')
+								img(src='images/linkedin.png', alt='LinkedIn')
+			.space
+			.space
+			.space
+			.space
+
+			.footer
+				p
+				| © 2015
+				| Marko Oksanen
+
+	a.gotop(href='#top') Top
