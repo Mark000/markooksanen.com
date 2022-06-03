@@ -1,4 +1,4 @@
 markooksanen.com
 ================
 
-homepage &amp; blog
+homepage &amp; blog.
