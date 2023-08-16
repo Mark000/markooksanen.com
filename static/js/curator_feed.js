@@ -1,7 +1,4 @@
-<!-- Place <div> tag where you want the feed to appear -->
-<!-- The Javascript can be moved to the end of the html page before the </body> tag -->
-
-  <script type="text/javascript">
+<script type="text/javascript">
 /* curator-feed-default-feed-layout */
 (function(){
 var i,e,d=document,s="script";i=d.createElement("script");i.async=1;i.charset="UTF-8";
